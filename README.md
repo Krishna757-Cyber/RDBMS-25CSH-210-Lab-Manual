@@ -1,4 +1,4 @@
-# DBMS-LAB-EXPERIMENTS
+# RDBMS-Lab
 
 Semester 3 DBMS lab experiments 1–6.
 
@@ -17,12 +17,12 @@ This repository contains the DBMS laboratory experiments in order. Experiments 1
 
 | Experiment | Topic | Files |
 |---|---|---|
-| 1 | Indian e-commerce ER diagram | [Experiment 1 README](Experiment-1/README.md) · [Original PDF](Experiment-1/Experiment_1.pdf) |
-| 2 | Relational schema and MySQL constraints | [Experiment 2 README](Experiment-2/README.md) · [Original PDF](Experiment-2/Experiment_2.pdf) |
-| 3 | Employee, department, and project queries | [Experiment 3 README](Experiment-3/README.md) · [SQL source](Experiment-3/experiment_3.sql) |
-| 4 | Joins, subqueries, and query plans | [Experiment 4 README](Experiment-4/README.md) · [SQL source](Experiment-4/experiment_4.sql) |
-| 5 | Views and recursive reporting chain | [Experiment 5 README](Experiment-5/README.md) · [SQL source](Experiment-5/experiment_5.sql) |
-| 6 | Stored procedure, validation, and audit triggers | [Experiment 6 README](Experiment-6/README.md) · [SQL source](Experiment-6/experiment_6.sql) |
+| 1 | Indian e-commerce ER diagram | [Experiment 1 README](Experiment%201/README.md) · [Original PDF](Experiment%201/Experiment%201%20.pdf) |
+| 2 | Relational schema and MySQL constraints | [Experiment 2 README](Experiment%202/README.md) · [Original PDF](Experiment%202/Experiment%202.pdf) · [SQL source](Experiment%202/Exp2.sql) |
+| 3 | Employee, department, and project queries | [Experiment 3 README](Experiment%203/README.md) · [Original PDF](Experiment%203/DBMS_Lab_Experiment_3%20Krishna.pdf) · [SQL source](Experiment%203/Exp3.sql) |
+| 4 | Joins, subqueries, and query plans | [Experiment 4 README](Experiment%204/README.md) · [Original PDF](Experiment%204/DBMS_Experiment_4_Lab_Krishna.pdf) · [SQL source](Experiment%204/Exp4.sql) |
+| 5 | Views and recursive reporting chain | [Experiment 5 README](Experiment%205/README.md) · [Original PDF](Experiment%205/DBMS_Experiment_5_SQL_Views_Krishna.pdf) · [SQL source](Experiment%205/Exp5.sql) |
+| 6 | Stored procedure, validation, and audit triggers | [Experiment 6 README](Experiment%206/README.md) · [Original PDF](Experiment%206/DBMS_Experiment_6_Stored_Procedure_Triggers_Krishna.pdf) · [SQL source](Experiment%206/Exp6.sql) |
 
 ### Topics at a Glance
 
@@ -40,33 +40,38 @@ This repository contains the DBMS laboratory experiments in order. Experiments 1
 ## Repository Structure
 
 ```
-DBMS-LAB-EXPERIMENTS/
+RDBMS-Lab/
 ├── README.md
-├── Experiment-1/
+├── Experiment 1/
 │   ├── README.md
-│   └── Experiment_1.pdf
-├── Experiment-2/
+│   └── Experiment 1 .pdf
+├── Experiment 2/
 │   ├── README.md
-│   └── Experiment_2.pdf
-├── Experiment-3/
+│   ├── Exp2.sql
+│   └── Experiment 2.pdf
+├── Experiment 3/
 │   ├── README.md
-│   └── experiment_3.sql
-├── Experiment-4/
+│   ├── DBMS_Lab_Experiment_3 Krishna.pdf
+│   └── Exp3.sql
+├── Experiment 4/
 │   ├── README.md
-│   └── experiment_4.sql
-├── Experiment-5/
+│   ├── DBMS_Experiment_4_Lab_Krishna.pdf
+│   └── Exp4.sql
+├── Experiment 5/
 │   ├── README.md
-│   └── experiment_5.sql
-└── Experiment-6/
+│   ├── DBMS_Experiment_5_SQL_Views_Krishna.pdf
+│   └── Exp5.sql
+└── Experiment 6/
     ├── README.md
-    └── experiment_6.sql
+    ├── DBMS_Experiment_6_Stored_Procedure_Triggers_Krishna.pdf
+    └── Exp6.sql
 ```
 
 ---
 
 ## Database Setup
 
-Experiments 3–6 use **MySQL 8.0+**. Each script creates or resets its own sample tables, so every script can be re-run safely.
+Experiments 2–6 use **MySQL 8.0+**. Each script creates or resets its own sample tables, so every script can be re-run safely.
 
 | Experiment | Database used |
 |---|---|
@@ -86,7 +91,7 @@ The source PDFs and the SQL scripts are organized separately by experiment. The 
 
 ```bash
 # Example: run Experiment 5 from the command line
-mysql -u <user> -p < Experiment-5/experiment_5.sql
+mysql -u <user> -p < "Experiment 5/Exp5.sql"
 ```
 
 Or open the `.sql` file in MySQL Workbench or any online MySQL compiler (for example ByteXL) and run it.
