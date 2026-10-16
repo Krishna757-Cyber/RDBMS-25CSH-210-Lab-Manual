@@ -40,7 +40,6 @@ Code
 
 The complete source:
 
-sql
 -- Experiment 3: Employee-Department-Project queries
 -- MySQL 8.0+
 CREATE DATABASE IF NOT EXISTS DBMS_LAB;
@@ -197,6 +196,7 @@ FROM Employee e
 JOIN Department d ON e.dept_id = d.dept_id
 JOIN Project p ON e.project_id = p.project_id
 ORDER BY e.salary DESC;
+
 Output
 
 Results from the included dataset (the PDF contains the screenshots of each query run in the SQL editor):
