@@ -1,45 +1,54 @@
-Experiment 3 — Employee, Department, and Project Queries
-Aim
+# Experiment 3 — Employee, Department, and Project Queries
 
-To create an Employee–Department–Project database schema, insert at least 30 employees across 5 departments and 8 projects, and execute SQL queries demonstrating selection, projection, aggregation, GROUP BY, HAVING, CASE expressions, and ORDER BY.
+## Aim
 
-Description
+To create an Employee–Department–Project database schema, insert at least 30 employees across 5 departments and 8 projects, and execute SQL queries demonstrating selection, projection, aggregation, `GROUP BY`, `HAVING`, `CASE` expressions, and `ORDER BY`.
+
+## Description
 
 This experiment demonstrates the use of SQL for managing and analyzing data stored in an Employee–Department–Project schema. The database contains five departments, eight projects, and thirty employees distributed among the departments and projects.
 
 The experiment covers these SQL operations:
 
-Selection using WHERE
-Projection using SELECT with specific columns
-Aggregation using COUNT, AVG and SUM
-Grouping records using GROUP BY
-Filtering grouped results using HAVING
-Conditional classification using CASE expressions
-Sorting query results using ORDER BY
-Joins across three tables for a combined report
+- **Selection** using `WHERE`
+- **Projection** using `SELECT` with specific columns
+- **Aggregation** using `COUNT`, `AVG` and `SUM`
+- **Grouping** records using `GROUP BY`
+- **Filtering grouped results** using `HAVING`
+- **Conditional classification** using `CASE` expressions
+- **Sorting** query results using `ORDER BY`
+- **Joins** across three tables for a combined report
 
 The schema uses primary keys and foreign keys to maintain relationships between departments, projects and employees. The queries generate useful reports such as department-wise employee counts, average salaries, project assignments, salary classifications, and departments satisfying specified conditions.
 
-Schema
+## Schema
 
-Department is the parent of Project; both Department and Project are referenced by Employee.
+`Department` is the parent of `Project`; both `Department` and `Project` are referenced by `Employee`.
 
-Table	Primary Key	Foreign Keys	Columns
-Department	dept_id	—	dept_name (NOT NULL), location
-Project	project_id	dept_id → Department	project_name (NOT NULL), budget
-Employee	emp_id	dept_id → Department, project_id → Project	emp_name (NOT NULL), email, salary, hire_date
-Sample Data
-Table	Rows	Details
-Department	5	Computer Science, Human Resources, Finance, Marketing, Operations
-Project	8	IDs 101–108 (AI Research, Web Development, Recruitment Portal, Financial Analytics, Digital Marketing, Inventory System, Cloud Migration, Business Automation)
-Employee	30	IDs 1001–1030, six employees in each department
-Requirements
-MySQL 8.0 or later (or any online MySQL compiler, for example ByteXL).
-Run the SQL script in order. It creates/replaces the DBMS_LAB sample tables and inserts the complete dataset before running the ten queries.
-Code
+| Table | Primary Key | Foreign Keys | Columns |
+|-------|-------------|--------------|---------|
+| `Department` | `dept_id` | — | `dept_name` (NOT NULL), `location` |
+| `Project` | `project_id` | `dept_id` → Department | `project_name` (NOT NULL), `budget` |
+| `Employee` | `emp_id` | `dept_id` → Department, `project_id` → Project | `emp_name` (NOT NULL), `email`, `salary`, `hire_date` |
+
+### Sample Data
+
+| Table | Rows | Details |
+|-------|:----:|---------|
+| Department | 5 | Computer Science, Human Resources, Finance, Marketing, Operations |
+| Project | 8 | IDs 101–108 (AI Research, Web Development, Recruitment Portal, Financial Analytics, Digital Marketing, Inventory System, Cloud Migration, Business Automation) |
+| Employee | 30 | IDs 1001–1030, six employees in each department |
+
+## Requirements
+
+- MySQL 8.0 or later (or any online MySQL compiler, for example ByteXL).
+- Run the SQL script in order. It creates/replaces the `DBMS_LAB` sample tables and inserts the complete dataset before running the ten queries.
+
+## Code
 
 The complete source:
 
+```sql
 -- Experiment 3: Employee-Department-Project queries
 -- MySQL 8.0+
 CREATE DATABASE IF NOT EXISTS DBMS_LAB;
@@ -196,91 +205,122 @@ FROM Employee e
 JOIN Department d ON e.dept_id = d.dept_id
 JOIN Project p ON e.project_id = p.project_id
 ORDER BY e.salary DESC;
+```
 
-Output
+## Output
 
 Results from the included dataset (the PDF contains the screenshots of each query run in the SQL editor):
 
-#	Query	Result
-1	Selection (salary > 70000)	8 employee rows
-2	Projection	30 employee-name and salary rows
-3	Aggregate	30 employees; average salary = 63,833.33
-4	Department GROUP BY	5 rows; 6 employees in each department
-5	HAVING COUNT(*) > 5	All 5 departments (6 employees each)
-6	Salary CASE	5 High, 13 Medium and 12 Low Salary rows
-7	Salary descending	30 rows; highest is Tanya Kapoor (82,000), lowest is Rahul Kumar (48,000)
-8	Total salary by department	See table below
-9	Employee count by project	See table below
-10	Three-table report	30 rows ordered by descending salary
-Query 1 — Employees with salary > 70000
-emp_id	emp_name	email	salary	hire_date	dept_id	project_id
-1002	Riya Verma	riya@company.com	72000.00	2021-03-20	1	102
-1004	Neha Gupta	neha@company.com	81000.00	2020-06-18	1	107
-1006	Ananya Rao	ananya@company.com	76000.00	2021-11-05	1	107
-1014	Meera Shah	meera@company.com	75000.00	2020-10-19	3	104
-1016	Sneha Iyer	sneha@company.com	71000.00	2021-07-13	3	104
-1018	Tanya Kapoor	tanya@company.com	82000.00	2019-11-30	3	104
-1024	Diya Khanna	diya@company.com	73000.00	2021-12-18	4	105
-1030	Ira Saxena	ira@company.com	78000.00	2020-11-16	5	108
-Query 3 — Aggregation
-total_employees	average_salary
-30	63833.333333
-Query 4 — Department-wise count and average salary
-dept_id	employee_count	average_salary
-1	6	70166.666667
-2	6	53833.333333
-3	6	69666.666667
-4	6	61833.333333
-5	6	63666.666667
-Query 5 — Departments with more than 5 employees
-dept_id	employee_count
-1	6
-2	6
-3	6
-4	6
-5	6
-Query 6 — Salary categories
-Category	Rule	Employees
-High Salary	salary ≥ 75000	5
-Medium Salary	60000 ≤ salary < 75000	13
-Low Salary	salary < 60000	12
-Query 8 — Department-wise total salary
-dept_id	Department	total_salary
-1	Computer Science	421000.00
-3	Finance	418000.00
-5	Operations	382000.00
-4	Marketing	371000.00
-2	Human Resources	323000.00
-Query 9 — Project-wise employee count
-project_id	Project	employee_count
-103	Recruitment Portal	6
-104	Financial Analytics	6
-105	Digital Marketing	6
-106	Inventory System	3
-108	Business Automation	3
-101	AI Research	2
-102	Web Development	2
-107	Cloud Migration	2
-Query 10 — Employee, department and project report (top 5 rows)
-emp_name	dept_name	project_name	salary
-Tanya Kapoor	Finance	Financial Analytics	82000.00
-Neha Gupta	Computer Science	Cloud Migration	81000.00
-Ira Saxena	Operations	Business Automation	78000.00
-Ananya Rao	Computer Science	Cloud Migration	76000.00
-Meera Shah	Finance	Financial Analytics	75000.00
+| # | Query | Result |
+|:-:|-------|--------|
+| 1 | Selection (`salary > 70000`) | 8 employee rows |
+| 2 | Projection | 30 employee-name and salary rows |
+| 3 | Aggregate | 30 employees; average salary = 63,833.33 |
+| 4 | Department `GROUP BY` | 5 rows; 6 employees in each department |
+| 5 | `HAVING COUNT(*) > 5` | All 5 departments (6 employees each) |
+| 6 | Salary `CASE` | 5 High, 13 Medium and 12 Low Salary rows |
+| 7 | Salary descending | 30 rows; highest is Tanya Kapoor (82,000), lowest is Rahul Kumar (48,000) |
+| 8 | Total salary by department | See table below |
+| 9 | Employee count by project | See table below |
+| 10 | Three-table report | 30 rows ordered by descending salary |
 
-Exact row formatting and decimal display can vary by SQL client. Rows with equal counts in Query 9 may appear in a different order.
+### Query 1 — Employees with salary > 70000
 
-Concepts Demonstrated
-Concept	Query
-Selection (WHERE)	1
-Projection	2
-Aggregate functions (COUNT, AVG, SUM)	3, 4, 8, 9
-GROUP BY	4, 5, 8, 9
-HAVING	5
-CASE expression	6
-ORDER BY	7, 8, 9, 10
-JOIN on three tables	10
-Author
+| emp_id | emp_name | email | salary | hire_date | dept_id | project_id |
+|:------:|----------|-------|-------:|-----------|:-------:|:----------:|
+| 1002 | Riya Verma | riya@company.com | 72000.00 | 2021-03-20 | 1 | 102 |
+| 1004 | Neha Gupta | neha@company.com | 81000.00 | 2020-06-18 | 1 | 107 |
+| 1006 | Ananya Rao | ananya@company.com | 76000.00 | 2021-11-05 | 1 | 107 |
+| 1014 | Meera Shah | meera@company.com | 75000.00 | 2020-10-19 | 3 | 104 |
+| 1016 | Sneha Iyer | sneha@company.com | 71000.00 | 2021-07-13 | 3 | 104 |
+| 1018 | Tanya Kapoor | tanya@company.com | 82000.00 | 2019-11-30 | 3 | 104 |
+| 1024 | Diya Khanna | diya@company.com | 73000.00 | 2021-12-18 | 4 | 105 |
+| 1030 | Ira Saxena | ira@company.com | 78000.00 | 2020-11-16 | 5 | 108 |
 
-Krishna Gopal Rathore B.Tech CSE AI&ML-2(A) · Roll No. 25LBCS3190 Database Management Systems (DBMS) Lab — Experiment 3
+### Query 3 — Aggregation
+
+| total_employees | average_salary |
+|:---------------:|---------------:|
+| 30 | 63833.333333 |
+
+### Query 4 — Department-wise count and average salary
+
+| dept_id | employee_count | average_salary |
+|:-------:|:--------------:|---------------:|
+| 1 | 6 | 70166.666667 |
+| 2 | 6 | 53833.333333 |
+| 3 | 6 | 69666.666667 |
+| 4 | 6 | 61833.333333 |
+| 5 | 6 | 63666.666667 |
+
+### Query 5 — Departments with more than 5 employees
+
+| dept_id | employee_count |
+|:-------:|:--------------:|
+| 1 | 6 |
+| 2 | 6 |
+| 3 | 6 |
+| 4 | 6 |
+| 5 | 6 |
+
+### Query 6 — Salary categories
+
+| Category | Rule | Employees |
+|----------|------|:---------:|
+| High Salary | salary ≥ 75000 | 5 |
+| Medium Salary | 60000 ≤ salary < 75000 | 13 |
+| Low Salary | salary < 60000 | 12 |
+
+### Query 8 — Department-wise total salary
+
+| dept_id | Department | total_salary |
+|:-------:|------------|-------------:|
+| 1 | Computer Science | 421000.00 |
+| 3 | Finance | 418000.00 |
+| 5 | Operations | 382000.00 |
+| 4 | Marketing | 371000.00 |
+| 2 | Human Resources | 323000.00 |
+
+### Query 9 — Project-wise employee count
+
+| project_id | Project | employee_count |
+|:----------:|---------|:--------------:|
+| 103 | Recruitment Portal | 6 |
+| 104 | Financial Analytics | 6 |
+| 105 | Digital Marketing | 6 |
+| 106 | Inventory System | 3 |
+| 108 | Business Automation | 3 |
+| 101 | AI Research | 2 |
+| 102 | Web Development | 2 |
+| 107 | Cloud Migration | 2 |
+
+### Query 10 — Employee, department and project report (top 5 rows)
+
+| emp_name | dept_name | project_name | salary |
+|----------|-----------|--------------|-------:|
+| Tanya Kapoor | Finance | Financial Analytics | 82000.00 |
+| Neha Gupta | Computer Science | Cloud Migration | 81000.00 |
+| Ira Saxena | Operations | Business Automation | 78000.00 |
+| Ananya Rao | Computer Science | Cloud Migration | 76000.00 |
+| Meera Shah | Finance | Financial Analytics | 75000.00 |
+
+> Exact row formatting and decimal display can vary by SQL client. Rows with equal counts in Query 9 may appear in a different order.
+
+## Concepts Demonstrated
+
+| Concept | Query |
+|---------|:-----:|
+| Selection (`WHERE`) | 1 |
+| Projection | 2 |
+| Aggregate functions (`COUNT`, `AVG`, `SUM`) | 3, 4, 8, 9 |
+| `GROUP BY` | 4, 5, 8, 9 |
+| `HAVING` | 5 |
+| `CASE` expression | 6 |
+| `ORDER BY` | 7, 8, 9, 10 |
+| `JOIN` on three tables | 10 |
+
+## Author
+
+**Krishna Gopal Rathore**
+B.Tech CSE AI&ML-2(A) · Roll No. 25LBCS3190
+Database Management Systems (DBMS) Lab — Experiment 3
